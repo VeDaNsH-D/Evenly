@@ -4,10 +4,18 @@
 *.log
 *.pyc
 *.swp
+.DS_Store
+.atom/
 .buildlog/
 .history
+.svn/
+Thumbs.db
 
-
+# IntelliJ / Android Studio
+*.iml
+*.ipr
+*.iws
+.idea/
 
 # Flutter repo-specific
 /bin/cache/
@@ -28,8 +36,8 @@
 version
 analysis_benchmark.json
 
-# packages file containing multi-root paths
-.packages.generated
+# Visual Studio Code
+.vscode/
 
 # Flutter/Dart/Pub related
 **/doc/api/
@@ -45,6 +53,7 @@ flutter_*.png
 linked_*.ds
 unlinked.ds
 unlinked_spec.ds
+.packages.generated
 
 # Android related
 **/android/**/gradle-wrapper.jar
