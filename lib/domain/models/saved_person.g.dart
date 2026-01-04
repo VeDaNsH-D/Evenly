@@ -12,6 +12,7 @@ _$SavedPersonImpl _$$SavedPersonImplFromJson(Map<String, dynamic> json) =>
       name: json['name'] as String,
       createdAt: DateTime.parse(json['createdAt'] as String),
       useCount: (json['useCount'] as num?)?.toInt() ?? 0,
+      avatarColor: (json['avatarColor'] as num?)?.toInt(),
     );
 
 Map<String, dynamic> _$$SavedPersonImplToJson(_$SavedPersonImpl instance) =>
@@ -20,4 +21,5 @@ Map<String, dynamic> _$$SavedPersonImplToJson(_$SavedPersonImpl instance) =>
       'name': instance.name,
       'createdAt': instance.createdAt.toIso8601String(),
       'useCount': instance.useCount,
+      'avatarColor': instance.avatarColor,
     };

@@ -25,6 +25,7 @@ mixin _$SavedPerson {
   String get name => throw _privateConstructorUsedError;
   DateTime get createdAt => throw _privateConstructorUsedError;
   int get useCount => throw _privateConstructorUsedError;
+  int? get avatarColor => throw _privateConstructorUsedError;
 
   /// Serializes this SavedPerson to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -43,7 +44,7 @@ abstract class $SavedPersonCopyWith<$Res> {
     $Res Function(SavedPerson) then,
   ) = _$SavedPersonCopyWithImpl<$Res, SavedPerson>;
   @useResult
-  $Res call({String id, String name, DateTime createdAt, int useCount});
+  $Res call({String id, String name, DateTime createdAt, int useCount, int? avatarColor});
 }
 
 /// @nodoc
@@ -65,6 +66,7 @@ class _$SavedPersonCopyWithImpl<$Res, $Val extends SavedPerson>
     Object? name = null,
     Object? createdAt = null,
     Object? useCount = null,
+    Object? avatarColor = null,
   }) {
     return _then(
       _value.copyWith(
@@ -84,6 +86,9 @@ class _$SavedPersonCopyWithImpl<$Res, $Val extends SavedPerson>
                 ? _value.useCount
                 : useCount // ignore: cast_nullable_to_non_nullable
                       as int,
+            avatarColor: null == avatarColor
+                ? _value.avatarColor
+                : avatarColor as int?,
           )
           as $Val,
     );
@@ -99,7 +104,7 @@ abstract class _$$SavedPersonImplCopyWith<$Res>
   ) = __$$SavedPersonImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String id, String name, DateTime createdAt, int useCount});
+  $Res call({String id, String name, DateTime createdAt, int useCount, int? avatarColor});
 }
 
 /// @nodoc
@@ -120,6 +125,7 @@ class __$$SavedPersonImplCopyWithImpl<$Res>
     Object? name = null,
     Object? createdAt = null,
     Object? useCount = null,
+    Object? avatarColor = null,
   }) {
     return _then(
       _$SavedPersonImpl(
@@ -139,6 +145,9 @@ class __$$SavedPersonImplCopyWithImpl<$Res>
             ? _value.useCount
             : useCount // ignore: cast_nullable_to_non_nullable
                   as int,
+        avatarColor: null == avatarColor
+            ? _value.avatarColor
+            : avatarColor as int?,
       ),
     );
   }
@@ -152,6 +161,7 @@ class _$SavedPersonImpl implements _SavedPerson {
     required this.name,
     required this.createdAt,
     this.useCount = 0,
+    this.avatarColor,
   });
 
   factory _$SavedPersonImpl.fromJson(Map<String, dynamic> json) =>
@@ -166,10 +176,12 @@ class _$SavedPersonImpl implements _SavedPerson {
   @override
   @JsonKey()
   final int useCount;
+  @override
+  final int? avatarColor;
 
   @override
   String toString() {
-    return 'SavedPerson(id: $id, name: $name, createdAt: $createdAt, useCount: $useCount)';
+    return 'SavedPerson(id: $id, name: $name, createdAt: $createdAt, useCount: $useCount, avatarColor: $avatarColor)';
   }
 
   @override
@@ -182,12 +194,14 @@ class _$SavedPersonImpl implements _SavedPerson {
             (identical(other.createdAt, createdAt) ||
                 other.createdAt == createdAt) &&
             (identical(other.useCount, useCount) ||
-                other.useCount == useCount));
+                other.useCount == useCount) &&
+            (identical(other.avatarColor, avatarColor) ||
+                other.avatarColor == avatarColor));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, id, name, createdAt, useCount);
+  int get hashCode => Object.hash(runtimeType, id, name, createdAt, useCount, avatarColor);
 
   /// Create a copy of SavedPerson
   /// with the given fields replaced by the non-null parameter values.
@@ -209,6 +223,7 @@ abstract class _SavedPerson implements SavedPerson {
     required final String name,
     required final DateTime createdAt,
     final int useCount,
+    final int? avatarColor,
   }) = _$SavedPersonImpl;
 
   factory _SavedPerson.fromJson(Map<String, dynamic> json) =
@@ -222,6 +237,8 @@ abstract class _SavedPerson implements SavedPerson {
   DateTime get createdAt;
   @override
   int get useCount;
+  @override
+  int? get avatarColor;
 
   /// Create a copy of SavedPerson
   /// with the given fields replaced by the non-null parameter values.
