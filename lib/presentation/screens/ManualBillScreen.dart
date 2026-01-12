@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:uuid/uuid.dart';
+import '../../core/constants/app_strings.dart';
 import '../../state/providers/split_providers.dart';
 import '../../domain/models/split.dart';
 import '../../domain/models/item.dart';
@@ -48,9 +49,9 @@ class _ManualBillScreenState extends ConsumerState<ManualBillScreen> {
     final difference = now.difference(date);
 
     if (difference.inDays == 0) {
-      return 'Today';
+      return AppStrings.today;
     } else if (difference.inDays == 1) {
-      return 'Yesterday';
+      return AppStrings.yesterday;
     } else {
       return '${date.day}/${date.month}/${date.year}';
     }
@@ -91,7 +92,7 @@ class _ManualBillScreenState extends ConsumerState<ManualBillScreen> {
         // Show success message
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(
-            content: Text('Bill created successfully!'),
+            content: Text(AppStrings.billCreatedSuccess),
             backgroundColor: Colors.green,
             duration: Duration(seconds: 2),
           ),
@@ -103,7 +104,7 @@ class _ManualBillScreenState extends ConsumerState<ManualBillScreen> {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text('Error creating bill: $e'),
+            content: Text('${AppStrings.billCreateError}$e'),
             backgroundColor: Colors.red,
           ),
         );
@@ -120,7 +121,7 @@ class _ManualBillScreenState extends ConsumerState<ManualBillScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Create New Bill')),
+      appBar: AppBar(title: const Text(AppStrings.createNewBill)),
       body: SafeArea(
         child: SingleChildScrollView(
           child: Padding(
@@ -132,7 +133,7 @@ class _ManualBillScreenState extends ConsumerState<ManualBillScreen> {
                 children: [
                   const SizedBox(height: 16),
                   Text(
-                    'Bill Details',
+                    AppStrings.billDetails,
                     style: Theme.of(context).textTheme.headlineSmall?.copyWith(
                       fontWeight: FontWeight.bold,
                     ),
@@ -143,14 +144,14 @@ class _ManualBillScreenState extends ConsumerState<ManualBillScreen> {
                     child: TextFormField(
                       controller: _titleController,
                       decoration: const InputDecoration(
-                        labelText: 'Bill Title',
-                        hintText: 'e.g., Dinner at Joe\'s',
+                        labelText: AppStrings.billTitle,
+                        hintText: AppStrings.billTitleHint,
                         border: InputBorder.none,
                         prefixIcon: Icon(Icons.receipt_long),
                       ),
                       validator: (value) {
                         if (value == null || value.trim().isEmpty) {
-                          return 'Please enter a bill title';
+                          return AppStrings.enterBillTitle;
                         }
                         return null;
                       },
@@ -163,8 +164,8 @@ class _ManualBillScreenState extends ConsumerState<ManualBillScreen> {
                     child: TextFormField(
                       controller: _amountController,
                       decoration: const InputDecoration(
-                        labelText: 'Total Amount',
-                        hintText: '0.00',
+                        labelText: AppStrings.totalAmount,
+                        hintText: AppStrings.totalAmountHint,
                         border: InputBorder.none,
                         prefixIcon: Icon(Icons.attach_money),
                       ),
@@ -178,11 +179,11 @@ class _ManualBillScreenState extends ConsumerState<ManualBillScreen> {
                       ],
                       validator: (value) {
                         if (value == null || value.trim().isEmpty) {
-                          return 'Please enter an amount';
+                          return AppStrings.enterAmount;
                         }
                         final amount = double.tryParse(value);
                         if (amount == null || amount <= 0) {
-                          return 'Please enter a valid positive amount';
+                          return AppStrings.enterValidAmount;
                         }
                         return null;
                       },
@@ -203,7 +204,7 @@ class _ManualBillScreenState extends ConsumerState<ManualBillScreen> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  'Date',
+                                  AppStrings.date,
                                   style: Theme.of(context).textTheme.bodySmall
                                       ?.copyWith(
                                         color: Theme.of(
@@ -239,7 +240,7 @@ class _ManualBillScreenState extends ConsumerState<ManualBillScreen> {
                               width: 20,
                               child: CircularProgressIndicator(strokeWidth: 2),
                             )
-                          : const Text('Save Bill'),
+                          : const Text(AppStrings.saveBill),
                     ),
                   ),
                   const SizedBox(height: 16),
@@ -251,7 +252,7 @@ class _ManualBillScreenState extends ConsumerState<ManualBillScreen> {
                       style: OutlinedButton.styleFrom(
                         padding: const EdgeInsets.symmetric(vertical: 16),
                       ),
-                      child: const Text('Cancel'),
+                      child: const Text(AppStrings.cancel),
                     ),
                   ),
                 ],

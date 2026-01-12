@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import '../../core/constants/app_strings.dart';
 import '../../domain/services/camera_service.dart';
 
 /// Screen for scanning receipts using camera
@@ -33,7 +34,7 @@ class _ReceiptScanScreenState extends ConsumerState<ReceiptScanScreen> {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text('Failed to capture image: $e'),
+            content: Text('${AppStrings.captureFailed}$e'),
             backgroundColor: Theme.of(context).colorScheme.error,
           ),
         );
@@ -63,7 +64,7 @@ class _ReceiptScanScreenState extends ConsumerState<ReceiptScanScreen> {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text('Failed to pick image: $e'),
+            content: Text('${AppStrings.pickFailed}$e'),
             backgroundColor: Theme.of(context).colorScheme.error,
           ),
         );
@@ -83,7 +84,7 @@ class _ReceiptScanScreenState extends ConsumerState<ReceiptScanScreen> {
       // For now, we'll just navigate to the new split flow
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
-          content: Text('Receipt captured! OCR processing will be added in a future update.'),
+          content: Text(AppStrings.receiptCaptured),
           duration: Duration(seconds: 2),
         ),
       );
@@ -107,7 +108,7 @@ class _ReceiptScanScreenState extends ConsumerState<ReceiptScanScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Scan Receipt'),
+        title: const Text(AppStrings.scanReceiptTitle),
         leading: IconButton(
           icon: const Icon(Icons.close),
           onPressed: () => context.pop(),
@@ -137,7 +138,7 @@ class _ReceiptScanScreenState extends ConsumerState<ReceiptScanScreen> {
             ),
             const SizedBox(height: 32),
             Text(
-              'Scan Your Receipt',
+              AppStrings.scanYourReceipt,
               style: Theme.of(context).textTheme.headlineMedium?.copyWith(
                     fontWeight: FontWeight.bold,
                   ),
@@ -145,7 +146,7 @@ class _ReceiptScanScreenState extends ConsumerState<ReceiptScanScreen> {
             ),
             const SizedBox(height: 16),
             Text(
-              'Take a clear photo of your receipt to start splitting the bill',
+              AppStrings.scanInstructions,
               style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                     color: Theme.of(context).colorScheme.onSurfaceVariant,
                   ),
@@ -157,7 +158,7 @@ class _ReceiptScanScreenState extends ConsumerState<ReceiptScanScreen> {
               child: ElevatedButton.icon(
                 onPressed: _captureFromCamera,
                 icon: const Icon(Icons.camera_alt),
-                label: const Text('Take Photo'),
+                label: const Text(AppStrings.takePhoto),
                 style: ElevatedButton.styleFrom(
                   padding: const EdgeInsets.symmetric(vertical: 16),
                 ),
@@ -169,7 +170,7 @@ class _ReceiptScanScreenState extends ConsumerState<ReceiptScanScreen> {
               child: OutlinedButton.icon(
                 onPressed: _pickFromGallery,
                 icon: const Icon(Icons.photo_library),
-                label: const Text('Choose from Gallery'),
+                label: const Text(AppStrings.chooseFromGallery),
                 style: OutlinedButton.styleFrom(
                   padding: const EdgeInsets.symmetric(vertical: 16),
                 ),
@@ -191,7 +192,7 @@ class _ReceiptScanScreenState extends ConsumerState<ReceiptScanScreen> {
               child: Column(
                 children: [
                   Text(
-                    'Confirm Receipt Image',
+                    AppStrings.confirmReceiptImage,
                     style: Theme.of(context).textTheme.titleLarge?.copyWith(
                           fontWeight: FontWeight.bold,
                         ),
@@ -231,7 +232,7 @@ class _ReceiptScanScreenState extends ConsumerState<ReceiptScanScreen> {
                         const SizedBox(width: 12),
                         Expanded(
                           child: Text(
-                            'OCR processing will be added in a future update',
+                            AppStrings.ocrFutureUpdate,
                             style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                                   color: Theme.of(context).colorScheme.onPrimaryContainer,
                                 ),
@@ -262,7 +263,7 @@ class _ReceiptScanScreenState extends ConsumerState<ReceiptScanScreen> {
                   child: OutlinedButton.icon(
                     onPressed: _retakeImage,
                     icon: const Icon(Icons.refresh),
-                    label: const Text('Retake'),
+                    label: const Text(AppStrings.retake),
                     style: OutlinedButton.styleFrom(
                       padding: const EdgeInsets.symmetric(vertical: 16),
                     ),
@@ -274,7 +275,7 @@ class _ReceiptScanScreenState extends ConsumerState<ReceiptScanScreen> {
                   child: ElevatedButton.icon(
                     onPressed: _confirmImage,
                     icon: const Icon(Icons.check),
-                    label: const Text('Confirm & Continue'),
+                    label: const Text(AppStrings.confirmContinue),
                     style: ElevatedButton.styleFrom(
                       padding: const EdgeInsets.symmetric(vertical: 16),
                     ),

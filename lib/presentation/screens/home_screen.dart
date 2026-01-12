@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import '../../core/constants/app_strings.dart';
 import '../../state/providers/split_providers.dart';
 import '../widgets/frosted_card.dart';
 
@@ -13,11 +14,11 @@ class HomeScreen extends ConsumerWidget {
     final difference = now.difference(date);
 
     if (difference.inDays == 0) {
-      return 'Today';
+      return AppStrings.today;
     } else if (difference.inDays == 1) {
-      return 'Yesterday';
+      return AppStrings.yesterday;
     } else if (difference.inDays < 7) {
-      return '${difference.inDays} days ago';
+      return '${difference.inDays} ${AppStrings.daysAgo}';
     } else {
       return '${date.day}/${date.month}/${date.year}';
     }
@@ -38,7 +39,7 @@ class HomeScreen extends ConsumerWidget {
                 const SizedBox(height: 32),
                 // Headline
                 Text(
-                  'Split a bill\nin seconds',
+                  AppStrings.splitBillHeadline,
                   style: Theme.of(context).textTheme.displayLarge?.copyWith(
                     fontWeight: FontWeight.bold,
                     height: 1.2,
@@ -53,7 +54,7 @@ class HomeScreen extends ConsumerWidget {
                     style: ElevatedButton.styleFrom(
                       padding: const EdgeInsets.symmetric(vertical: 16),
                     ),
-                    child: const Text('Start New Split'),
+                    child: const Text(AppStrings.startNewSplit),
                   ),
                 ),
                 const SizedBox(height: 16),
@@ -63,7 +64,7 @@ class HomeScreen extends ConsumerWidget {
                   child: OutlinedButton.icon(
                     onPressed: () => context.push('/scan-receipt'),
                     icon: const Icon(Icons.camera_alt),
-                    label: const Text('Scan Receipt'),
+                    label: const Text(AppStrings.scanReceipt),
                     style: OutlinedButton.styleFrom(
                       padding: const EdgeInsets.symmetric(vertical: 16),
                     ),
@@ -76,7 +77,7 @@ class HomeScreen extends ConsumerWidget {
                   child: OutlinedButton.icon(
                     onPressed: () => context.push('/manage-people'),
                     icon: const Icon(Icons.people),
-                    label: const Text('Manage Friends'),
+                    label: const Text(AppStrings.manageFriends),
                     style: OutlinedButton.styleFrom(
                       padding: const EdgeInsets.symmetric(vertical: 16),
                     ),
@@ -87,7 +88,7 @@ class HomeScreen extends ConsumerWidget {
                 // Recent Splits Section
                 if (recentSplits.isNotEmpty) ...[
                   Text(
-                    'Recent Splits',
+                    AppStrings.recentSplits,
                     style: Theme.of(context).textTheme.titleLarge,
                   ),
                   const SizedBox(height: 16),
@@ -110,7 +111,7 @@ class HomeScreen extends ConsumerWidget {
                               children: [
                                 Expanded(
                                   child: Text(
-                                    split.name ?? 'Unnamed Split',
+                                    split.name ?? AppStrings.unnamedSplit,
                                     style: Theme.of(
                                       context,
                                     ).textTheme.titleMedium,
@@ -153,8 +154,8 @@ class HomeScreen extends ConsumerWidget {
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () => context.push('/new-bill'),
         icon: const Icon(Icons.receipt_long),
-        label: const Text('New Bill'),
-        tooltip: 'Create Manual Bill',
+        label: const Text(AppStrings.newBill),
+        tooltip: AppStrings.newBillTooltip,
       ),
     );
   }
